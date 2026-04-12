@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>红人营销.skill — 海外红人营销实战专家</title>
+  <meta name="description" content="浓缩 5 年实战经验，覆盖竞品分析、Brief撰写、建联谈判、预算规划全流程。在 Claude Code 输入 /红人营销 即可调用。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0D0D0D;
+      --bg2: #161B22;
+      --bg3: #1C2333;
+      --border: #30363D;
+      --green: #00D4AA;
+      --purple: #7C3AED;
+      --text: #E6EDF3;
+      --text2: #8B949E;
+      --text3: #6E7681;
+      --font: 'Noto Sans SC', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      height: 56px;
+      background: rgba(13,13,13,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-brand { font-family: var(--mono); font-size: 15px; color: var(--green); letter-spacing: 0.03em; }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { color: var(--text2); text-decoration: none; font-size: 14px; transition: color .2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      background: var(--green); color: #0D0D0D; font-weight: 700;
+      padding: 7px 18px; border-radius: 6px; font-size: 13px;
+      text-decoration: none; transition: opacity .2s;
+    }
+    .nav-cta:hover { opacity: .85; }
+
+    /* ── SECTION BASE ── */
+    section { padding: 90px 5%; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-family: var(--mono); font-size: 12px; color: var(--green); letter-spacing: .15em; text-transform: uppercase; margin-bottom: 12px; }
+    .section-title { font-size: clamp(28px, 4vw, 40px); font-weight: 900; line-height: 1.2; margin-bottom: 16px; }
+    .section-sub { color: var(--text2); font-size: 16px; max-width: 560px; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding-top: 56px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: center;
+      max-width: 1100px; margin: 0 auto; width: 100%;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(0,212,170,.1); border: 1px solid rgba(0,212,170,.3);
+      color: var(--green); font-size: 12px; font-family: var(--mono);
+      padding: 5px 12px; border-radius: 20px; margin-bottom: 20px;
+    }
+    .hero-badge span { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+    .hero-title {
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 900; line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .hero-title .highlight { color: var(--green); }
+    .hero-desc { color: var(--text2); font-size: 17px; line-height: 1.7; margin-bottom: 32px; }
+    .hero-desc strong { color: var(--text); }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--green); color: #0D0D0D; font-weight: 700;
+      padding: 13px 28px; border-radius: 8px; font-size: 15px;
+      text-decoration: none; transition: all .2s; border: none; cursor: pointer;
+    }
+    .btn-primary:hover { opacity: .88; transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent; color: var(--text); font-weight: 500;
+      padding: 13px 28px; border-radius: 8px; font-size: 15px;
+      text-decoration: none; border: 1px solid var(--border);
+      transition: all .2s; cursor: pointer;
+    }
+    .btn-outline:hover { border-color: var(--text2); background: rgba(255,255,255,.04); }
+
+    /* Hero Terminal */
+    .hero-terminal {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0,0,0,.6);
+    }
+    .terminal-bar {
+      display: flex; align-items: center; gap: 8px;
+      padding: 12px 16px;
+      background: var(--bg3);
+      border-bottom: 1px solid var(--border);
+    }
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .dot-r { background: #FF5F57; }
+    .dot-y { background: #FFBD2E; }
+    .dot-g { background: #28CA42; }
+    .terminal-title { font-family: var(--mono); font-size: 12px; color: var(--text3); margin-left: auto; margin-right: auto; }
+    .terminal-body { padding: 20px; font-family: var(--mono); font-size: 13px; line-height: 1.8; }
+    .t-prompt { color: var(--green); }
+    .t-cmd { color: var(--text); }
+    .t-reply { color: var(--text2); margin-top: 4px; }
+    .t-reply em { color: var(--text); font-style: normal; }
+    .t-reply .accent { color: var(--green); }
+    .cursor { display: inline-block; width: 8px; height: 14px; background: var(--green); animation: blink 1s step-end infinite; vertical-align: middle; margin-left: 2px; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    /* Hero BG grid */
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(0,212,170,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,170,.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
+      pointer-events: none;
+    }
+
+    /* ── PAIN POINTS ── */
+    #pain { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+    .pain-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px; padding: 28px;
+      position: relative; overflow: hidden;
+    }
+    .pain-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--purple), transparent);
+    }
+    .pain-icon { font-size: 28px; margin-bottom: 16px; }
+    .pain-text { font-size: 16px; font-weight: 700; line-height: 1.5; margin-bottom: 12px; }
+    .pain-sub { color: var(--text2); font-size: 13px; }
+    .pain-footer { margin-top: 48px; text-align: center; font-size: 18px; color: var(--text2); }
+    .pain-footer strong { color: var(--green); }
+
+    /* ── FEATURES ── */
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
+    .feat-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px; padding: 24px;
+      transition: all .25s;
+      cursor: default;
+    }
+    .feat-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0,212,170,.4);
+      box-shadow: 0 0 20px rgba(0,212,170,.08);
+    }
+    .feat-icon { font-size: 26px; margin-bottom: 12px; }
+    .feat-name { font-weight: 700; font-size: 15px; margin-bottom: 6px; }
+    .feat-desc { color: var(--text2); font-size: 13px; line-height: 1.6; margin-bottom: 12px; }
+    .feat-badge {
+      display: inline-block;
+      background: rgba(0,212,170,.12); color: var(--green);
+      font-size: 11px; font-family: var(--mono);
+      padding: 3px 9px; border-radius: 4px;
+    }
+
+    /* ── DEMO ── */
+    #demo { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .demo-layout { display: grid; grid-template-columns: 220px 1fr; gap: 32px; margin-top: 48px; align-items: start; }
+    .demo-tabs { display: flex; flex-direction: column; gap: 8px; }
+    .demo-tab {
+      padding: 14px 18px; border-radius: 8px;
+      border: 1px solid var(--border);
+      cursor: pointer; transition: all .2s;
+      font-size: 14px; font-weight: 500;
+      background: transparent; color: var(--text2);
+      text-align: left;
+    }
+    .demo-tab:hover { background: var(--bg3); color: var(--text); }
+    .demo-tab.active {
+      background: rgba(0,212,170,.1);
+      border-color: rgba(0,212,170,.4);
+      color: var(--green);
+    }
+    .demo-tab-icon { display: block; font-size: 20px; margin-bottom: 4px; }
+    .demo-terminal {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,.5);
+    }
+    .demo-body { padding: 24px; font-family: var(--mono); font-size: 13px; line-height: 1.9; min-height: 340px; }
+    .msg-user { display: flex; justify-content: flex-end; margin-bottom: 16px; }
+    .msg-user span {
+      background: var(--bg3); color: var(--text);
+      padding: 10px 16px; border-radius: 12px 12px 2px 12px;
+      max-width: 80%; font-size: 13px;
+    }
+    .msg-skill { display: flex; gap: 10px; margin-bottom: 8px; }
+    .skill-avatar {
+      width: 28px; height: 28px; border-radius: 6px;
+      background: linear-gradient(135deg, var(--green), var(--purple));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; flex-shrink: 0; margin-top: 2px;
+    }
+    .msg-skill-content {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-left: 3px solid var(--green);
+      padding: 12px 16px; border-radius: 2px 12px 12px 12px;
+      max-width: 92%; font-size: 13px; color: var(--text2);
+    }
+    .msg-skill-content strong { color: var(--text); }
+    .msg-skill-content .code-inline { background: rgba(0,212,170,.1); color: var(--green); padding: 1px 6px; border-radius: 4px; font-family: var(--mono); }
+    .demo-panel { display: none; }
+    .demo-panel.active { display: block; }
+
+    /* ── INSTALL ── */
+    .install-wrap { margin-top: 48px; }
+    .install-trigger {
+      text-align: center; margin-bottom: 52px;
+    }
+    .trigger-word {
+      font-family: var(--mono); font-size: clamp(36px, 6vw, 64px);
+      font-weight: 700; color: var(--green);
+      background: rgba(0,212,170,.08); border: 2px solid rgba(0,212,170,.3);
+      display: inline-block; padding: 16px 40px; border-radius: 12px;
+      letter-spacing: .04em;
+    }
+    .trigger-hint { color: var(--text2); margin-top: 12px; font-size: 14px; }
+    .install-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .install-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden;
+    }
+    .install-card-header {
+      padding: 14px 20px;
+      background: var(--bg3); border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .install-card-title { font-size: 13px; font-weight: 700; }
+    .install-card-badge { font-size: 11px; color: var(--text3); }
+    .code-block {
+      padding: 18px 20px;
+      font-family: var(--mono); font-size: 12px; color: var(--text2);
+      line-height: 1.8; position: relative;
+    }
+    .code-block .comment { color: var(--text3); }
+    .copy-btn {
+      position: absolute; top: 12px; right: 12px;
+      background: var(--bg3); border: 1px solid var(--border);
+      color: var(--text2); font-size: 11px; font-family: var(--mono);
+      padding: 4px 10px; border-radius: 5px; cursor: pointer;
+      transition: all .2s;
+    }
+    .copy-btn:hover { border-color: var(--green); color: var(--green); }
+    .install-prereq {
+      margin-top: 28px; padding: 16px 20px;
+      background: rgba(124,58,237,.08); border: 1px solid rgba(124,58,237,.25);
+      border-radius: 8px; font-size: 13px; color: var(--text2);
+    }
+    .install-prereq a { color: var(--purple); text-decoration: none; }
+    .install-prereq a:hover { text-decoration: underline; }
+
+    /* ── ABOUT ── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-top: 48px; }
+    .about-info { }
+    .about-name { font-size: 28px; font-weight: 900; margin-bottom: 8px; }
+    .about-role { color: var(--green); font-family: var(--mono); font-size: 13px; margin-bottom: 20px; }
+    .about-desc { color: var(--text2); font-size: 15px; line-height: 1.8; margin-bottom: 28px; }
+    .about-links { display: flex; gap: 12px; }
+    .about-link {
+      display: flex; align-items: center; gap: 8px;
+      padding: 9px 18px; border-radius: 8px;
+      border: 1px solid var(--border); font-size: 13px;
+      text-decoration: none; color: var(--text2);
+      transition: all .2s;
+    }
+    .about-link:hover { border-color: var(--text2); color: var(--text); }
+    .about-quote {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-left: 4px solid var(--green);
+      border-radius: 0 12px 12px 0; padding: 32px;
+    }
+    .about-quote blockquote {
+      font-size: clamp(18px, 2.5vw, 24px); font-weight: 700;
+      line-height: 1.6; color: var(--text);
+    }
+    .about-quote cite { display: block; margin-top: 16px; color: var(--text2); font-size: 13px; font-style: normal; }
+
+    /* ── FAQ ── */
+    #faq { background: var(--bg2); border-top: 1px solid var(--border); }
+    .faq-list { margin-top: 48px; display: flex; flex-direction: column; gap: 12px; }
+    .faq-item {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 10px; overflow: hidden;
+    }
+    .faq-q {
+      padding: 18px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      cursor: pointer; font-weight: 700; font-size: 15px;
+      transition: background .2s; user-select: none;
+    }
+    .faq-q:hover { background: rgba(255,255,255,.03); }
+    .faq-arrow { color: var(--text3); transition: transform .25s; font-size: 18px; }
+    .faq-item.open .faq-arrow { transform: rotate(180deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height .3s ease, padding .3s ease;
+      padding: 0 24px; color: var(--text2); font-size: 14px; line-height: 1.8;
+    }
+    .faq-item.open .faq-a { max-height: 300px; padding: 0 24px 20px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg); border-top: 1px solid var(--border);
+      padding: 52px 5%;
+      text-align: center;
+    }
+    .footer-logo { font-family: var(--mono); font-size: 18px; color: var(--green); margin-bottom: 16px; }
+    .footer-desc { color: var(--text2); font-size: 14px; margin-bottom: 24px; }
+    .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 32px; }
+    .footer-links a { color: var(--text3); text-decoration: none; font-size: 13px; transition: color .2s; }
+    .footer-links a:hover { color: var(--text); }
+    .footer-end { color: var(--text3); font-size: 13px; line-height: 1.8; }
+    .footer-end strong { color: var(--text2); }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .5s ease, transform .5s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-terminal { display: none; }
+      .pain-grid, .feature-grid { grid-template-columns: 1fr 1fr; }
+      .demo-layout { grid-template-columns: 1fr; }
+      .demo-tabs { flex-direction: row; overflow-x: auto; }
+      .demo-tab { white-space: nowrap; }
+      .install-grid, .about-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .pain-grid, .feature-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      section { padding: 64px 5%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">/红人营销.skill</div>
+  <div class="nav-links">
+    <a href="#features">功能</a>
+    <a href="#demo">演示</a>
+    <a href="#install">安装</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <a href="#install" class="nav-cta">立即安装</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-badge"><span></span> Claude Code Skill · 开源免费</div>
+      <h1 class="hero-title">你的<span class="highlight">海外红人营销</span>专家，随时在线</h1>
+      <p class="hero-desc">
+        浓缩 <strong>5 年实战经验</strong>，覆盖竞品分析、营销策略、Brief 撰写、建联谈判、数据复盘、预算规划 <strong>全流程 9 大场景</strong>。<br><br>
+        不只回答问题——还能直接帮你生成建联邮件、Brief、预算方案。
+      </p>
+      <div class="hero-btns">
+        <a href="#install" class="btn-primary">立即安装</a>
+        <a href="#demo" class="btn-outline">看效果示例 →</a>
+      </div>
+    </div>
+    <div class="hero-terminal">
+      <div class="terminal-bar">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+        <div class="terminal-title">claude — /红人营销</div>
+      </div>
+      <div class="terminal-body">
+        <div><span class="t-prompt">你 ›</span> <span class="t-cmd">/红人营销 老板给了5万美金季度预算，怎么分？</span></div>
+        <div class="t-reply" style="margin-top:12px;">
+          <em>$50,000 一个季度，按三阶段来：</em>
+        </div>
+        <div class="t-reply"><span class="accent">第1个月</span>（摸索期）— <em>$10,000</em></div>
+        <div class="t-reply" style="padding-left:16px; color: var(--text3);">KOC 为主，测内容模板</div>
+        <div class="t-reply"><span class="accent">第2个月</span>（爆款期）— <em>$18,000</em></div>
+        <div class="t-reply" style="padding-left:16px; color: var(--text3);">腰部 KOL 加到40%，复制潜力模板</div>
+        <div class="t-reply"><span class="accent">第3个月</span>（放量期）— <em>$22,000</em></div>
+        <div class="t-reply" style="padding-left:16px; color: var(--text3);">KOL 提至60%，放大曝光</div>
+        <div class="t-reply" style="margin-top:10px; color: var(--text3);">博主合作费 80% · 投流加热 20%</div>
+        <div style="margin-top: 14px;"><span class="t-prompt">你 ›</span> <span class="cursor"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN POINTS -->
+<section id="pain">
+  <div class="container">
+    <div class="section-label">你是不是也遇到过</div>
+    <h2 class="section-title">这些坑，不用你再踩一遍</h2>
+    <div class="pain-grid reveal">
+      <div class="pain-card">
+        <div class="pain-icon">📮</div>
+        <div class="pain-text">"建联了 100 个博主，回复 5 个，上线 2 个，ROI 问号？"</div>
+        <div class="pain-sub">不知道怎么写开发信，回复率上不去，转化更看不到</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-card" style="border:none;padding:0;">
+        <div class="pain-icon">📋</div>
+        <div class="pain-text">"Brief 写了半天，博主拍出来完全不是那回事"</div>
+        <div class="pain-sub">卖点没说清楚，内容和品牌调性对不上，改稿扯皮没完没了</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">📊</div>
+        <div class="pain-text">"老板要季度预算方案，你打开 Excel 不知道从哪下手"</div>
+        <div class="pain-sub">没有框架，没有数据，拍脑袋的预算方案经不起推敲</div>
+      </div>
+    </div>
+    <div class="pain-footer reveal">这些坑，<strong>不用你再踩一遍</strong>。</div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="container">
+    <div class="section-label">覆盖场景</div>
+    <h2 class="section-title">全流程 9 大场景</h2>
+    <p class="section-sub">从入行到进阶，从策略到执行，一个 Skill 搞定</p>
+    <div class="feature-grid reveal">
+      <div class="feat-card">
+        <div class="feat-icon">🔍</div>
+        <div class="feat-name">竞品分析</div>
+        <div class="feat-desc">用工具+方法快速摸清竞品打法，看达人矩阵、挖内容策略</div>
+        <span class="feat-badge">可生成分析框架</span>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🎯</div>
+        <div class="feat-name">营销策略</div>
+        <div class="feat-desc">目标拆解、三阶段规划、KOL/KOC 配比、内容赛马策略</div>
+        <span class="feat-badge">可生成 Campaign 方案</span>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">📋</div>
+        <div class="feat-name">Brief 撰写</div>
+        <div class="feat-desc">结构完整、卖点清晰，博主拍完就能用的合作需求单</div>
+        <span class="feat-badge">可生成 Brief 文档</span>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">✉️</div>
+        <div class="feat-name">建联话术</div>
+        <div class="feat-desc">中英文开发信模板，抓住「Why should they care」核心逻辑</div>
+        <span class="feat-badge">可生成中英文邮件</span>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">👥</div>
+        <div class="feat-name">博主筛选</div>
+        <div class="feat-desc">看播放中位数不看粉丝数，用对工具，找到真正有效的博主</div>
+        <span class="feat-badge">工具 + SOP</span>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">💰</div>
+        <div class="feat-name">谈判砍价</div>
+        <div class="feat-desc">报价判断基准、5大砍价策略、合同注意事项，拿到合理报价</div>
+        <span class="feat-badge">可生成砍价话术</span>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">📊</div>
+        <div class="feat-name">数据复盘</div>
+        <div class="feat-desc">AARRR 漏斗拆解，找到问题出在哪一步，给出优化方向</div>
+        <span class="feat-badge">可生成复盘框架</span>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">📅</div>
+        <div class="feat-name">预算规划</div>
+        <div class="feat-desc">CPM 反推预算、阶段分配、博主合作 vs 投流比例（60/80/20 法则）</div>
+        <span class="feat-badge">可生成预算方案</span>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🚀</div>
+        <div class="feat-name">职业发展</div>
+        <div class="feat-desc">选公司、能力模型、晋升路线，从专员到主管的成长地图</div>
+        <span class="feat-badge">实战建议</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section id="demo">
+  <div class="container">
+    <div class="section-label">效果演示</div>
+    <h2 class="section-title">看它实际长什么样</h2>
+    <p class="section-sub">真实 Skill 回复，不是包装过的完美示例</p>
+    <div class="demo-layout reveal">
+      <div class="demo-tabs">
+        <button class="demo-tab active" onclick="switchDemo(0)">
+          <span class="demo-tab-icon">🌱</span>新手入门
+        </button>
+        <button class="demo-tab" onclick="switchDemo(1)">
+          <span class="demo-tab-icon">✉️</span>生成邮件
+        </button>
+        <button class="demo-tab" onclick="switchDemo(2)">
+          <span class="demo-tab-icon">💰</span>预算规划
+        </button>
+      </div>
+      <div class="demo-terminal">
+        <div class="terminal-bar">
+          <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+          <div class="terminal-title">Claude Code — 红人营销.skill</div>
+        </div>
+        <div class="demo-body">
+
+          <!-- Panel 0 -->
+          <div class="demo-panel active" id="panel-0">
+            <div class="msg-user"><span>刚入行，老板让我建联博主，不知道从哪下手</span></div>
+            <div class="msg-skill">
+              <div class="skill-avatar">🎯</div>
+              <div class="msg-skill-content">
+                别急着群发邮件，先搞清楚 3 件事：<br><br>
+                <strong>1.</strong> 你们产品卖给谁？什么人群？<br>
+                <strong>2.</strong> 竞品在用什么博主？什么内容形式？<br>
+                <strong>3.</strong> 你有多少预算？纯佣还是付费？<br><br>
+                建议先花半天做个简单竞品分析：去 TikTok 搜竞品名，找播放量最高的 5 个视频，看看博主粉丝多少、内容什么形式，基本就知道你该找什么样的博主了。<br><br>
+                工具推荐：先装个 <span class="code-inline">Wednesday</span> 插件（免费），直接在 TikTok 页面上看博主数据，别一上来就买工具。<br><br>
+                💡 <strong>最重要的</strong>：先找对人，再想怎么联系。很多人直接去找博主，却没想清楚为什么找这个博主，这才是回复率低的根本原因。
+              </div>
+            </div>
+          </div>
+
+          <!-- Panel 1 -->
+          <div class="demo-panel" id="panel-1">
+            <div class="msg-user"><span>帮我写一封建联邮件，我们是做便携充电器的，主打轻便和快充</span></div>
+            <div class="msg-skill">
+              <div class="skill-avatar">✉️</div>
+              <div class="msg-skill-content">
+                <strong>Subject:</strong> Collab from [你的品牌] — Ultralight 65W Charger for Creators<br><br>
+                Hi [博主名字],<br><br>
+                I've been following your work for a while (really enjoyed your recent take on [博主最近视频主题]).<br><br>
+                I'm [名字] from [品牌名]. We just launched a portable charger that's 40% lighter than anything on the market — and charges at 65W. Perfect for creators who travel light.<br><br>
+                We're looking for a few tech creators to test it out and give honest feedback. <strong>No strings attached.</strong><br><br>
+                If the content performs well, we'd love to put our marketing budget behind it (our past campaigns hit 2M+ views on TikTok).<br><br>
+                Interested?<br><br>
+                Cheers, [名字]<br><br>
+                💡 <span class="code-inline">Collab</span> 不要写成 <span class="code-inline">Cooperation</span>，是行业惯例，显专业。
+              </div>
+            </div>
+          </div>
+
+          <!-- Panel 2 -->
+          <div class="demo-panel" id="panel-2">
+            <div class="msg-user"><span>老板给了 5 万美金预算做一个季度，怎么分配？</span></div>
+            <div class="msg-skill">
+              <div class="skill-avatar">📊</div>
+              <div class="msg-skill-content">
+                $50,000 一个季度，按三阶段分：<br><br>
+                <strong>第 1 个月（摸索期）— $10,000</strong><br>
+                KOC 为主（80%），测试卖点和内容模板<br>
+                目标：找到 3-5 个潜力内容方向<br><br>
+                <strong>第 2 个月（爆款期）— $18,000</strong><br>
+                加大腰部 KOL 到 40%，复制潜力模板<br>
+                目标：1-2 个爆款（10万+ 播放）<br><br>
+                <strong>第 3 个月（放量期）— $22,000</strong><br>
+                KOL 占比提到 60%，放大曝光<br>
+                目标：品牌词搜索量明显增长<br><br>
+                博主合作费用占 <strong>80%（$40,000）</strong>，投流加热占 <strong>20%（$10,000）</strong>——优先加热自然流量好的内容，别拿去救烂内容。
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTALL -->
+<section id="install">
+  <div class="container">
+    <div class="section-label">安装使用</div>
+    <h2 class="section-title">两条命令，马上开始</h2>
+    <div class="install-wrap reveal">
+      <div class="install-trigger">
+        <div class="trigger-word">/红人营销</div>
+        <div class="trigger-hint">安装后，在 Claude Code 中输入以上触发词即可调用</div>
+      </div>
+      <div class="install-grid">
+        <div class="install-card">
+          <div class="install-card-header">
+            <span class="install-card-title">全局安装（推荐）</span>
+            <span class="install-card-badge">所有项目都能用</span>
+          </div>
+          <div class="code-block" id="code-global">
+            <span class="comment"># 全局安装</span><br>
+            git clone https://github.com/<br>
+            &nbsp;&nbsp;waynefu2020/influencer-marketing-skill<br>
+            &nbsp;&nbsp;~/.claude/skills/红人营销
+            <button class="copy-btn" onclick="copyCode('code-global', this)">复制</button>
+          </div>
+        </div>
+        <div class="install-card">
+          <div class="install-card-header">
+            <span class="install-card-title">项目级安装</span>
+            <span class="install-card-badge">仅当前项目可用</span>
+          </div>
+          <div class="code-block" id="code-project">
+            <span class="comment"># 在 git 仓库根目录执行</span><br>
+            mkdir -p .claude/skills<br>
+            git clone https://github.com/<br>
+            &nbsp;&nbsp;waynefu2020/influencer-marketing-skill<br>
+            &nbsp;&nbsp;.claude/skills/红人营销
+            <button class="copy-btn" onclick="copyCode('code-project', this)">复制</button>
+          </div>
+        </div>
+      </div>
+      <div class="install-prereq">
+        📋 前提：需要安装 <a href="https://claude.ai/code" target="_blank">Claude Code</a>（Anthropic 官方 CLI，有免费额度）
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-label">关于作者</div>
+    <div class="about-grid reveal">
+      <div class="about-info">
+        <div class="about-name">大威</div>
+        <div class="about-role">海外红人营销实战专家 · @大威的出海增长笔记</div>
+        <div class="about-desc">
+          8 年营销经验，其中 5 年专注海外红人营销，深度实战于服装、3C 等多个品类。熟悉 TikTok、Instagram、YouTube 三大平台红人生态。<br><br>
+          把这些年踩过的坑、总结出的方法，浓缩进这个 Skill，希望让更多从业者少走弯路。
+        </div>
+        <div class="about-links">
+          <a href="https://github.com/waynefu2020/influencer-marketing-skill" target="_blank" class="about-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            GitHub
+          </a>
+          <a href="https://www.xiaohongshu.com" target="_blank" class="about-link">
+            📕 小红书
+          </a>
+        </div>
+      </div>
+      <div class="about-quote">
+        <blockquote>
+          "红人营销的核心不在'红人'，而是'营销'。<br><br>
+          消费者喜欢你的内容，才会对你的产品有认同，才会有下单的动作。"
+        </blockquote>
+        <cite>— 大威 · 海外红人营销入门进阶5讲</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="section-label">常见问题</div>
+    <h2 class="section-title">有什么问题？</h2>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          我不懂技术，能用吗？
+          <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-a">能。Claude Code 是一个命令行工具，按官网文档安装好之后，输入 /红人营销 就能像聊天一样使用，不需要写代码。如果装 Claude Code 遇到问题，可以直接去 claude.ai/code 查文档。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          和直接问 ChatGPT 有什么区别？
+          <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-a">这个 Skill 内置了专门针对海外红人营销的知识库和模板，回答更准确、更贴实战，不会给你通用废话。它知道具体的工具推荐（比如 Wednesday、EasyKOL）、知道博主报价的行业基准、知道砍价的具体话术。而且能直接生成建联邮件、Brief、预算方案等产出物，不只是回答问题。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          免费的吗？
+          <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-a">Skill 本身完全免费（MIT 开源）。使用需要有 Claude Code 账号（Anthropic 官方产品），Claude Code 有免费额度，日常使用基本够用。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          能帮我生成哪些产出物？
+          <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-a">可以生成：中英文建联邮件（首次建联/免费寄样/付费合作/二次跟进）、Brief 文档、竞品分析框架表格、年度/季度预算方案、数据复盘报告框架、完整 Campaign 方案。生成时会主动向你确认产品名、品类、目标市场等关键信息，不会瞎编数据。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          主要面向哪些平台和品类？
+          <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-a">平台覆盖 TikTok、Instagram、YouTube 三大主流平台。品类定位为通用，基于服装、3C 等多个品类的实战经验提炼，方法论可以覆盖大部分主流出海品类。超出知识库范围的问题会基于经验推理并明确标注"推测"。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">/红人营销.skill</div>
+  <div class="footer-desc">海外红人营销实战知识库 · 基于 5 年实战经验 · MIT 开源</div>
+  <div class="footer-links">
+    <a href="https://github.com/waynefu2020/influencer-marketing-skill" target="_blank">GitHub</a>
+    <a href="https://github.com/waynefu2020/influencer-marketing-skill#安装" target="_blank">安装文档</a>
+    <a href="https://claude.ai/code" target="_blank">Claude Code</a>
+  </div>
+  <div class="footer-end">
+    <strong>祝大家在出海这条路上，都能做出自己的爆款。共勉！</strong><br>
+    MIT License © <a href="https://github.com/waynefu2020" target="_blank" style="color:var(--text2);text-decoration:none;">waynefu2020</a>
+  </div>
+</footer>
+
+<script>
+  // Scroll Reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Demo Tab Switch
+  function switchDemo(idx) {
+    document.querySelectorAll('.demo-tab').forEach((t, i) => t.classList.toggle('active', i === idx));
+    document.querySelectorAll('.demo-panel').forEach((p, i) => p.classList.toggle('active', i === idx));
+  }
+
+  // Copy Code
+  function copyCode(id, btn) {
+    const el = document.getElementById(id);
+    // Get text content, strip HTML
+    const tmp = document.createElement('div');
+    tmp.innerHTML = el.innerHTML;
+    // Remove the button text
+    tmp.querySelectorAll('button').forEach(b => b.remove());
+    const text = tmp.innerText.trim().replace(/\n\s+/g, ' \\\n  ');
+    // Actually build the real commands
+    const cmds = {
+      'code-global': 'git clone https://github.com/waynefu2020/influencer-marketing-skill ~/.claude/skills/红人营销',
+      'code-project': 'mkdir -p .claude/skills && git clone https://github.com/waynefu2020/influencer-marketing-skill .claude/skills/红人营销'
+    };
+    navigator.clipboard.writeText(cmds[id] || text).then(() => {
+      const orig = btn.textContent;
+      btn.textContent = '✓ 已复制';
+      btn.style.color = 'var(--green)';
+      btn.style.borderColor = 'var(--green)';
+      setTimeout(() => { btn.textContent = orig; btn.style.color = ''; btn.style.borderColor = ''; }, 2000);
+    });
+  }
+
+  // FAQ Accordion
+  function toggleFaq(el) {
+    el.parentElement.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
