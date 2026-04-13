@@ -97,31 +97,37 @@ git clone https://github.com/waynefu2020/influencer-marketing-skill ~/.claude/sk
 **场景二：帮写建联邮件**
 
 ```
-用户          ❯ 帮我写一封建联邮件，我们是做便携充电器的，主打轻便和快充
+用户          ❯ 帮我写一封建联邮件，产品是 AI 学习笔记本，目标是大学生博主
 
-红人营销.skill ❯ Subject: Collab from [你的品牌] — Love your tech reviews!
+红人营销.skill ❯ Subject: Paid UGC Collab: NoteAI x Emma
 
-                Hi [博主名字],
+                Hi Emma,
 
-                I've been following your work for a while (really enjoyed your
-                recent take on [博主最近一个视频主题]).
+                I'm [你的名字] from [品牌名]. I've been following your
+                journey balancing AP classes and college apps — huge congrats
+                on that 93.5% biology final! 🎉 Just saw your latest vlog
+                about finals season and we'd love to help you "lock in"
+                for the next quarter.
 
-                I'm [你的名字] from [品牌名]. We just launched a portable charger
-                that's 40% lighter than anything on the market — and charges at 65W.
+                We've developed NoteAI, an AI note-taking pen that records
+                lectures, transcribes them, and generates instant summaries —
+                essentially an "academic weapon" for someone with a schedule
+                as packed as yours.
 
-                We're looking for a few tech creators to test it out and give honest
-                feedback. No strings attached.
+                We'd love to have you onboard for a commission collaboration:
 
-                If the content performs well, we'd love to put our marketing budget
-                behind it (our past campaigns hit 2M+ views on TikTok).
+                Base Commission: 15% per sale
+                Bonus: $50 bonus if your video hits 50K views
+                Plus: Free product + exclusive discount code for your audience
 
-                Interested?
+                Would you be interested in seeing the creative brief?
 
-                Cheers,
+                Best,
                 [你的名字]
 
-                💡 记得把 [占位符] 替换成实际信息。
-                标题里用 Collab 不要用 Cooperation，这是行业惯例。
+                💡 开头夸夸要根据博主主页内容个性化——这封的关键是
+                   提到了她具体的分数和视频，不是通用套话。
+                   Brief 不在首封发，等博主回复感兴趣后再发。
 ```
 
 **场景三：预算规划**
