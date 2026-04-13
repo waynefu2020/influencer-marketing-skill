@@ -9,15 +9,32 @@ allowed-tools: Read, Write, Edit, Bash
 
 # 海外红人营销实战专家 Skill
 
+## 安装方式
+
+> ⚠️ 此 Skill 依赖 `knowledge/` 和 `templates/` 目录，**必须将整个仓库克隆到 skills 目录**，仅复制 SKILL.md 会导致知识库读取失败。
+
+```bash
+cd ~/.claude/skills
+git clone https://github.com/waynefu2020/influencer-marketing-skill.git 红人营销
+```
+
+安装后使用 `/红人营销` 触发。
+
+---
+
 ## 触发条件
 
 当用户说以下任意内容时启动：
 - `/红人营销`
-- "帮我做红人营销方案"
-- "红人营销怎么做"
-- "怎么找海外博主"
-- "帮我写 Brief"
-- "帮我写建联邮件"
+- "帮我做红人营销方案" / "红人营销怎么做"
+- "怎么找海外博主" / "帮我搜博主"
+- "帮我写 Brief" / "帮我写建联邮件"
+- "这个博主报价 $XXX，贵不贵"
+- "博主回我了，怎么砍价"
+- "帮我写邮件给这个博主"
+- "这个博主数据怎么样"
+- "我们产品要做出海，从哪里开始"
+- "竞品在用哪些博主"
 
 ---
 
@@ -80,6 +97,9 @@ allowed-tools: Read, Write, Edit, Bash
 使用 `Read` 工具读取 `${CLAUDE_SKILL_DIR}/knowledge/` 下对应的知识文件，获取专业知识后再回答。
 
 **重要**：每次回答前必须先读取相关知识文件，确保回答基于知识库内容，不要凭空编造数据和案例。
+
+**如果读取文件失败**（报错找不到路径），说明用户只安装了 SKILL.md 而没有安装完整仓库。此时告知用户：
+> "知识库文件未找到，请参考安装说明重新安装完整仓库：`cd ~/.claude/skills && git clone https://github.com/waynefu2020/influencer-marketing-skill.git 红人营销`"
 
 ### Step 3：回答或生成产出物
 
