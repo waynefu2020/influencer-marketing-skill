@@ -48,26 +48,36 @@ Best,
 
 ---
 
-## 模板 C：付费合作版
+## 模板 C：付费 UGC 合作版
+
+> 使用说明：
+> - 标题固定格式：`Paid UGC Collab: [产品名] x [博主名字]`
+> - 开头夸夸段需根据博主主页内容个性化撰写，不可用通用话术
+> - 合作条款（佣金/置换/奖金）需用户根据实际情况填写后发送
+> - **Brief 不在首封邮件中发送**，等博主回复感兴趣后再发
 
 ```
-Subject: Paid Collab Opportunity — [品牌名] x [博主名字]
+Subject: Paid UGC Collab: [产品名] x [博主名字]
 
 Hi [博主名字],
 
-Hope you are doing well!
+I'm [你的名字] from [公司名]. [根据博主近期内容个性化夸夸，例如：I've been following your journey balancing high school and college—huge congrats on that 93.5% biology final score! 🎉 Just saw your latest vlog about the finals season and we'd love to help you "lock in" for the next quarter.]
 
-I'm [你的名字] from [公司名称]. We're launching a campaign for our [产品名] and think your content style is a perfect match.
+We've developed [产品名], [一句话产品介绍，突出核心功能和目标用户场景，例如：an AI note-taking pen that records lectures, transcribes them, and generates instant AI summaries—essentially an "academic weapon" for someone with a schedule as packed as yours.]
 
-We believe that your talent and charm can shine even brighter on [平台], and we are excited to be part of that journey.
+We'd love to have you onboard for a [合作模式：佣金/置换/混合，根据实际情况填写] collaboration:
 
-We're offering $[金额] for a dedicated [内容形式] featuring our product. Let us know your rate card as well!
+Base Commission: [填写]
+Bonus: [填写]
+Plus: [填写，如免费产品/专属折扣码等]
 
-Looking forward to hearing from you.
+Would you be interested in seeing the creative brief?
 
 Best,
 [你的名字]
 ```
+
+**博主回复感兴趣后**，再发送 Brief（参见 `brief_template.md`）。首封邮件不主动附上 Brief，降低阅读门槛，先确认意向。
 
 ---
 
